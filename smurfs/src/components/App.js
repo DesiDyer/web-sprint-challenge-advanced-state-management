@@ -1,16 +1,33 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./App.css";
+import { fetchSmurfs } from "../actions/smurfActions";
+import SmurfContainer from "../components/SmurfContainer";
+import SmurfForm from "../components/SmurfForm";
+
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchSmurfs();
+  }
+
   render() {
     return (
       <div className="App">
-        <h1>SMURFS! W/Redux</h1>
-        <div>Welcome to your state management version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
+        <h2>Smurf Village</h2>
+        <div className="ui center aligned basic segment">
+          <SmurfForm />
+        </div>
+        <div className="ui horizontal divider">Smurfs</div>
+        <div className="ui center aligned basic segment">
+          <SmurfContainer />
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return state;
+};
+
+export default connect(mapStateToProps, { fetchSmurfs })(App);
